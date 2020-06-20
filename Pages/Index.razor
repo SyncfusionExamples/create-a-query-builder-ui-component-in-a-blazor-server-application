@@ -1,0 +1,48 @@
+﻿@page "/"
+    @using Syncfusion.Blazor.QueryBuilder
+    @using Syncfusion.Blazor.Buttons
+
+    @*<SfButton CssClass="e-primary" @onclick="AddRules">Add Rules</SfButton>
+    <SfButton CssClass="e-primary" @onclick="GetRules">Get Rules</SfButton>*@
+    <br />
+    <SfQueryBuilder @ref="QueryBuilderObj">
+        <QueryBuilderColumns>
+            <QueryBuilderColumn Field="EmployeeID" Label="Employee ID" Type="number"></QueryBuilderColumn>
+            <QueryBuilderColumn Field="FirstName" Label="First Name" Type="string"></QueryBuilderColumn>
+            <QueryBuilderColumn Field="HireDate" Label="Hire Date" Type="date"></QueryBuilderColumn>
+            <QueryBuilderColumn Field="Country" Label="Country" Type="string"></QueryBuilderColumn>
+            <QueryBuilderColumn Field="City" Label="City" Type="string"></QueryBuilderColumn>
+        </QueryBuilderColumns>
+        <QueryBuilderRule Condition="or" Rules="@employeeRules"></QueryBuilderRule>
+    </SfQueryBuilder>
+
+
+    @code {
+        SfQueryBuilder QueryBuilderObj;
+
+        List<RuleModel> employeeRules = new List<RuleModel> {
+            new RuleModel { Field = "EmployeeID", Operator = "notequal", Value = "1001" },
+            new RuleModel { Field = "Country", Operator = "equal", Value = "England" }
+        };
+
+        //public RuleModel ruleModel = new RuleModel
+        //{
+        //    Condition = "or",
+        //    Rules = new List<RuleModel> {
+        //        new RuleModel { Field = "EmployeeID",Operator = "notequal", Value = "1001"  },
+        //        new RuleModel { Field = "Country", Operator = "equal", Value = "England" } }
+        //};
+
+        //private void AddRules()
+        //{
+        //    QueryBuilderObj.SetRules(ruleModel);
+        //    QueryBuilderObj.SetRulesFromSql("EmployeeID != 1001 or Country = 'England'");
+        //}
+
+        //private async void GetRules()
+        //{
+        //    RuleModel rule = await QueryBuilderObj.GetRules();
+        //    RuleModel validRule = await QueryBuilderObj.GetValidRules(rule);
+        //    string sql = await QueryBuilderObj.GetSqlFromRules(validRule);
+        //}
+    }
