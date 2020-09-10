@@ -2,7 +2,7 @@
 
 This is a quick-start project provided by Syncfusion to help you create a Blazor Query Builder. This example explains how to create a Blazor application and add the Syncfusion Blazor package. It shows how to add the Syncfusion Blazor Query Builder component to a Blazor server application, columns to the Query builder, and filter the data by adding conditions to it. It also shows how to get the rules from the Query Builder.
 
-Watch a How-to Video:
+Watch a How-to Video:https://www.syncfusion.com/tutorial-videos/blazor/query-builder-ui?title=create-a-query-builder-ui-component-in-a-blazor-server
 
 Documentation: https://blazor.syncfusion.com/documentation/query-builder/getting-started
 
