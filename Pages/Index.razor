@@ -1,48 +1,29 @@
 ﻿@page "/"
-    @using Syncfusion.Blazor.QueryBuilder
-    @using Syncfusion.Blazor.Buttons
 
-    @*<SfButton CssClass="e-primary" @onclick="AddRules">Add Rules</SfButton>
-    <SfButton CssClass="e-primary" @onclick="GetRules">Get Rules</SfButton>*@
-    <br />
-    <SfQueryBuilder @ref="QueryBuilderObj">
-        <QueryBuilderColumns>
-            <QueryBuilderColumn Field="EmployeeID" Label="Employee ID" Type="number"></QueryBuilderColumn>
-            <QueryBuilderColumn Field="FirstName" Label="First Name" Type="string"></QueryBuilderColumn>
-            <QueryBuilderColumn Field="HireDate" Label="Hire Date" Type="date"></QueryBuilderColumn>
-            <QueryBuilderColumn Field="Country" Label="Country" Type="string"></QueryBuilderColumn>
-            <QueryBuilderColumn Field="City" Label="City" Type="string"></QueryBuilderColumn>
-        </QueryBuilderColumns>
-        <QueryBuilderRule Condition="or" Rules="@employeeRules"></QueryBuilderRule>
-    </SfQueryBuilder>
+<SfQueryBuilder TValue="EmployeeDetails">
+    <QueryBuilderRule Condition="and" Rules="Rules"></QueryBuilderRule>
+    <QueryBuilderColumns>
+        <QueryBuilderColumn Field="HireDate" Label="Hire Date" Type="ColumnType.Date" Format="MM-yyyy-dd"></QueryBuilderColumn>
+        <QueryBuilderColumn Field="FirstName" Label="First Name" Type="ColumnType.String"></QueryBuilderColumn>
+        <QueryBuilderColumn Field="Salary" Label="Salary" Type="ColumnType.Number" Format="c2"></QueryBuilderColumn>
+    </QueryBuilderColumns>
+</SfQueryBuilder>
 
-
-    @code {
-        SfQueryBuilder QueryBuilderObj;
-
-        List<RuleModel> employeeRules = new List<RuleModel> {
-            new RuleModel { Field = "EmployeeID", Operator = "notequal", Value = "1001" },
-            new RuleModel { Field = "Country", Operator = "equal", Value = "England" }
-        };
-
-        //public RuleModel ruleModel = new RuleModel
-        //{
-        //    Condition = "or",
-        //    Rules = new List<RuleModel> {
-        //        new RuleModel { Field = "EmployeeID",Operator = "notequal", Value = "1001"  },
-        //        new RuleModel { Field = "Country", Operator = "equal", Value = "England" } }
-        //};
-
-        //private void AddRules()
-        //{
-        //    QueryBuilderObj.SetRules(ruleModel);
-        //    QueryBuilderObj.SetRulesFromSql("EmployeeID != 1001 or Country = 'England'");
-        //}
-
-        //private async void GetRules()
-        //{
-        //    RuleModel rule = await QueryBuilderObj.GetRules();
-        //    RuleModel validRule = await QueryBuilderObj.GetValidRules(rule);
-        //    string sql = await QueryBuilderObj.GetSqlFromRules(validRule);
-        //}
+@code {
+    List<RuleModel> Rules = new List<RuleModel>()
+    {
+        new RuleModel { Field="HireDate", Label="HireDate", Type="Date", Operator="equal", Value = new DateTime(DateTime.Now.Year,DateTime.Now.Month,4) },
+        new RuleModel { Field="Salary", Label="Salary",  Type="Number", Operator="greaterthan", Value = 23 }
+    };
+    public class EmployeeDetails
+    {
+        public int EmployeeID { get; set; }
+        public string FirstName { get; set; }
+        public bool TitleOfCourtesy { get; set; }
+        public string Title { get; set; }
+        public DateTime HireDate { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public int Salary { get; set; }
     }
+}
